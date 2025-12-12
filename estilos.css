@@ -290,4 +290,15 @@ img {
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   transform: translateY(-1px);
 }
+@media (max-width: 600px) {
+  .site-header .main-nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .site-header .main-nav a {
+    width: auto;
+    margin: 5px 5px 0 0;
+  }
+}
 
