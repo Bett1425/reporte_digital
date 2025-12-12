@@ -1,8 +1,7 @@
-* ————————————————————————————————
+/* ————————————————————————————————
    MINIATURAS DE VIDEO (BOTONES)
    ———————————————————————————————— */
 
-/* MINIATURAS DE VIDEO */
 .video-list {
   margin-top: 40px;
   display: grid;
@@ -17,26 +16,29 @@
 }
 
 .video-list .thumb {
-    width: 180px;
-    height: 140px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #222;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
+  width: 180px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  padding: 5px;
 }
 
-/* Mostrar imagen dentro de miniatura */
 .video-list .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  visibility: visible; /* ✔️ Ya no oculta la imagen */
-
-
-
+  visibility: visible;
+}
 
 /* Icono de play */
 .video-list .thumb::after {
@@ -50,33 +52,27 @@
   pointer-events: none;
 }
 
+/* Hover miniaturas */
 .video-list .thumb:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(0,0,0,0.35);
   background-color: #111;
 }
 
-/* Hover — efecto botón */
-.video-list .thumb:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
-  background-color: #111;  
-  border-color: red;   
-}
-
 .video-list .thumb:hover::after {
   transform: translate(-50%, -50%) scale(1.3);
   color: #be1a1a;
 }
-/* Título dentro de las miniaturas generado automáticamente */
-.thumb::before {
+
+/* Título dentro de las miniaturas */
+.video-list .thumb::before {
   content: attr(data-title);
   position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.6);
-  color: rgb(219, 16, 16);
+  color: #db1010;
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -87,42 +83,52 @@
   pointer-events: none;
 }
 
-
 /* ————————————————————————————————
    MENÚ COMO BOTONES
    ———————————————————————————————— */
 
-/* ============================= */
-/* FIX DEFINITIVO BOTONES GRANDES */
-/* ============================= */
-
 .main-nav {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 10px !important;
-  width: auto !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: auto;
 }
 
 .main-nav a {
-  display: inline-flex !important;
-  width: auto !important;
-  max-width: max-content !important;
-  flex: 0 0 auto !important;
-  padding: 8px 14px !important;
-  margin: 0 !important;
-  white-space: nowrap !important;
+  display: inline-flex;
+  width: auto;
+  max-width: max-content;
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  margin: 0;
+  white-space: nowrap;
+  background-color: #d10e0e;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 2px solid #b60909;
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.25s ease;
 }
 
-/* MOBILE */
+.main-nav a:hover {
+  background-color: #b80b0b;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transform: translateY(-1px);
+}
+
+/* Responsivo */
 @media (max-width: 600px) {
   .main-nav {
-    flex-wrap: wrap !important;
+    flex-wrap: wrap;
   }
 
   .main-nav a {
-    width: auto !important;
-    flex: 0 0 auto !important;
+    width: auto;
+    flex: 0 0 auto;
+    margin: 5px 5px 0 0;
   }
 }
 
@@ -149,19 +155,19 @@ img {
 }
 
 .logo-rd {
-  color: red;           /* letras rojas */
-  font-weight: 700;     /* negrita */
-  font-size: 2rem;      /* tamaño más grande que el resto */
-  margin-right: 5px;    /* separación del texto */
+  color: red;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-right: 5px;
 }
+
 .branding h1 {
-  font-size: 1.5rem;   /* tamaño general del título */
+  font-size: 1.5rem;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 5px;
 }
-
 
 /* ————————————————————————————————
    ENCABEZADO
@@ -247,52 +253,3 @@ img {
 .site-footer a {
   color: #c91111;
 }
-/* ============================= */
-/* RESTAURAR VISIBILIDAD DEL MENÚ */
-/* ============================= */
-
-/* ============================= */
-/* FIX DEFINITIVO BOTONES MENU  */
-/* ============================= */
-
-.site-header .main-nav a {
-  display: inline-block;
-  background-color: #d10e0e;
-  color: #ffffff;
-  padding: 10px 18px;
-  margin-left: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 8px;
-  border: 2px solid #b60909;
-  font-family: 'Roboto', sans-serif;
-  transition: all 0.25s ease;
-}
-
-.site-header .main-nav a:hover {
-  background-color: #b80b0b;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  transform: translateY(-1px);
-}
-@media (max-width: 600px) {
-  .site-header .main-nav {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .site-header .main-nav a {
-    width: auto;
-    margin: 5px 5px 0 0;
-  }
-}
-/* ===== FIX DEFINITIVO: eliminar etiqueta negra de miniaturas ===== */
-.video-list .thumb::before {
-  content: none !important;
-  display: none !important;
-}
-/* Evitar miniaturas vacías */
-.video-list .thumb:empty {
-  display: none !important;
-}
-
-
