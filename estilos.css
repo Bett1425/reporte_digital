@@ -36,8 +36,8 @@
   visibility: visible; /* ✔️ Ya no oculta la imagen */
 }
 
-/* Título dentro de las miniaturas */
-.video-list .thumb::before {
+/* 
+.thumb::before {
   content: attr(data-title);
   position: absolute;
   bottom: 8px;
@@ -51,8 +51,11 @@
   font-weight: 600;
   text-align: center;
   width: 90%;
+  max-width: 160px;
   pointer-events: none;
 }
+*/
+
 
 /* Icono de play */
 .video-list .thumb::after {
