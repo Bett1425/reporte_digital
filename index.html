@@ -1,144 +1,55 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reporte Digital - Noticiero</title>
+// ==========================
+// FECHA AUTOMÁTICA
+// ==========================
+document.getElementById("today").textContent =
+  new Date().toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
 
-  <link rel="stylesheet" href="estilos.css" />
-</head>
-<body>
-
-  <!-- ========= HEADER ========= -->
-  <header class="site-header">
-    <div class="container header-inner">
-
-      <div class="branding">
-        <h1><span class="logo-rd">RD</span> Reporte Digital</h1>
-      </div>
-
-      <nav class="main-nav">
-        <a class="nav-btn" href="index.html?video=Video1.mp4&title=Bienvenidos">Inicio</a>
-        <a class="nav-btn" href="index.html?video=Video2.mp4&title=Política">Política</a>
-        <a class="nav-btn" href="index.html?video=Video3.mp4&title=Sociedad">Sociedad</a>
-        <a class="nav-btn" href="index.html?video=Video4.mp4&title=Ciencia">Ciencia</a>
-        <a class="nav-btn" href="index.html?video=Video5.mp4&title=Deportes">Deportes</a>
-        <a class="nav-btn" href="index.html?video=Video6.mp4&title=Clima">Clima</a>
-      </nav>
-
-    </div>
-  </header>
+document.getElementById("year").textContent = new Date().getFullYear();
 
 
-  <!-- ========= CONTENIDO PRINCIPAL ========= -->
-  <main class="container">
-
-    <!-- —— VIDEO DESTACADO —— -->
-    <section class="hero">
-      <h2>Video destacado</h2>
-
-      <div class="video-wrapper">
-        <video id="video-feature" controls preload="metadata" poster="img/placeholder.jpg">
-          <source src="videos/Video1.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <h3 id="featured-title">Bienvenidos</h3>
-      <p class="meta">Locución y edición: Betina Ruiz Díaz • Fecha: <span id="today"></span></p>
-    </section>
+// ==========================
+// MODO OSCURO
+// ==========================
+document.getElementById("toggle-dark").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
 
 
-    <!-- —— MINIATURAS —— -->
-    <section class="video-list">
-      <h2>Seleccionar video</h2>
+// ==========================
+// CAMBIO DE VIDEO CON MINIATURAS
+// ==========================
+const featureVideo = document.getElementById("video-feature");
+const featureTitle = document.getElementById("featured-title");
 
-      <div class="thumb" data-video="Video2.mp4" data-title="Política">
-        <img src="img/placeholder.jpg" alt="Miniatura política">
-      </div>
+document.querySelectorAll(".thumb").forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    const src = thumb.dataset.video;
+    const title = thumb.dataset.title;
 
-      <div class="thumb" data-video="Video3.mp4" data-title="Sociedad">
-        <img src="img/placeholder.jpg" alt="Miniatura sociedad">
-      </div>
+    featureVideo.querySelector("source").src = "videos/" + src;
+    featureVideo.load();
+    featureVideo.play();
 
-      <div class="thumb" data-video="Video4.mp4" data-title="Ciencia">
-        <img src="img/placeholder.jpg" alt="Miniatura ciencia">
-      </div>
-
-      <div class="thumb" data-video="Video5.mp4" data-title="Deportes">
-        <img src="img/placeholder.jpg" alt="Miniatura deportes">
-      </div>
-
-      <div class="thumb" data-video="Video6.mp4" data-title="Clima">
-        <img src="img/placeholder.jpg" alt="Miniatura clima">
-      </div>
-
-    </section>
+    featureTitle.textContent = title;
+  });
+});
 
 
-    <!-- —— CONTROLES —— -->
-    <aside class="controls">
-      <input id="search" placeholder="Buscar noticias..." />
-      <button id="toggle-dark">Modo oscuro</button>
-    </aside>
+// ==========================
+// CAMBIO DE VIDEO POR SECCIÓN (URL PARAMS)
+// ==========================
+const params = new URLSearchParams(window.location.search);
+const videoParam = params.get("video");
+const titleParam = params.get("title");
 
-  </main>
+if (videoParam) {
+  featureVideo.querySelector("source").src = "videos/" + videoParam;
+  featureVideo.load();
+  featureVideo.play();
 
-
-  <!-- ========= FOOTER ========= -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> Reporte Digital — Proyecto de Betina Ruiz Díaz</p>
-    </div>
-  </footer>
-
-
-  <!-- ========= SCRIPT ========= -->
-
-  <script src="script.js"></script>
-
-  <script>
-    // Año
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Fecha
-    const today = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById("today").textContent = today.toLocaleDateString('es-ES', options);
-
-    // Modo oscuro
-    document.getElementById("toggle-dark").addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-    });
-
-    // Miniaturas → cambiar video
-    const featureVideo = document.getElementById("video-feature");
-    const featureTitle = document.getElementById("featured-title");
-
-    document.querySelectorAll(".thumb").forEach(thumb => {
-      thumb.addEventListener("click", () => {
-        const src = thumb.dataset.video;
-        const title = thumb.dataset.title;
-
-        featureVideo.querySelector("source").src = "videos/" + src;
-        featureVideo.load();
-        featureVideo.play();
-
-        featureTitle.textContent = title;
-      });
-    });
-
-    // Leer parámetros URL
-    const params = new URLSearchParams(window.location.search);
-    const videoParam = params.get("video");
-    const titleParam = params.get("title");
-
-    if (videoParam) {
-      featureVideo.querySelector("source").src = "videos/" + videoParam;
-      featureVideo.load();
-      featureVideo.play();
-      featureTitle.textContent = titleParam || "Sección";
-    }
-  </script>
-
-</body>
-</html>
+  featureTitle.textContent = titleParam || "Sección";
+}
