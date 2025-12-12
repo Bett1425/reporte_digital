@@ -4,7 +4,7 @@
 .video-list {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
 }
 
@@ -22,16 +22,8 @@
   transition: transform 0.25s, box-shadow 0.25s, background-color 0.25s;
   background-color: #222; 
   position: relative;
-  height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  text-align: center;
-  padding: 5px;
-  border: 2px solid transparent;
+  height: 140px;
+  
 }
 
 /* Ocultar cualquier imagen rota */
@@ -40,8 +32,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  background-color: #222;
   visibility: hidden; /* ocultamos imágenes */
+}
+.video-list .thumb h1,
+.video-list .thumb h2,
+.video-list .thumb h3 {
+  display: none; /* Esto oculta los textos que pusiste */
 }
 
 /* Ícono play */
@@ -105,6 +101,11 @@
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   border: 2px solid transparent;
+}
+.main-nav {
+   display: flex;
+   gap: 10px;
+   flex-wrap: nowrap;
 }
 
 .main-nav a:hover {
