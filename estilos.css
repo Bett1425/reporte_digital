@@ -2,6 +2,7 @@
    MINIATURAS DE VIDEO (BOTONES)
    ———————————————————————————————— */
 
+/* MINIATURAS DE VIDEO */
 .video-list {
   margin-top: 40px;
   display: grid;
@@ -15,37 +16,47 @@
   font-weight: 600;
 }
 
-/* Contenedor de miniatura / botón */
+/* Miniaturas */
 .video-list .thumb {
   cursor: pointer;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s, background-color 0.25s;
-  background-color: #222; 
+  background-color: #222;
   position: relative;
   height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  text-align: center;
-  padding: 5px;
-  border: 2px solid transparent;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
-/* Ocultar cualquier imagen rota */
+/* Mostrar imagen dentro de miniatura */
 .video-list .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  background-color: #222;
-  visibility: hidden; /* ocultamos imágenes */
+  visibility: visible; /* ✔️ Ya no oculta la imagen */
 }
 
-/* Ícono play */
+/* Título dentro de las miniaturas */
+.video-list .thumb::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: rgb(219, 16, 16);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  width: 90%;
+  pointer-events: none;
+}
+
+/* Icono de play */
 .video-list .thumb::after {
   content: "▶";
   position: absolute;
@@ -55,6 +66,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+.video-list .thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+  background-color: #111;
 }
 
 /* Hover — efecto botón */
