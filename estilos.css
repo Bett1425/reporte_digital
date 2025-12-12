@@ -291,4 +291,9 @@ img {
     margin: 5px 5px 0 0;
   }
 }
+/* ===== FIX DEFINITIVO: eliminar etiqueta negra de miniaturas ===== */
+.video-list .thumb::before {
+  content: none !important;
+  display: none !important;
+}
 
