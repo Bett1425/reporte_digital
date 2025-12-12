@@ -1,57 +1,55 @@
-// script.js - interactividad: lista de noticias, búsqueda, fecha, modo oscuro y comentarios locales
-const newsData = [
-  {id:1, title:"Resumen: Apertura del noticiero", category:"sociedad", video:"videos/noticia1.mp4", desc:"Introducción y presentación del proyecto."},
-  {id:2, title:"Política: Medida local destacada", category:"politica", video:"videos/noticia2.mp4", desc:"Breve nota sobre una medida pública."},
-  {id:3, title:"Ciencia: Avance tecnológico", category:"ciencia", video:"videos/noticia3.mp4", desc:"Resumen de un avance científico o tecnológico."},
-  {id:4, title:"Deportes: Resultado reciente", category:"deportes", video:"videos/noticia4.mp4", desc:"Resumen deportivo."},
-];
-
-function renderNews(list){
-  const container = document.getElementById('news-list');
-  container.innerHTML = '';
-  list.forEach(n=>{
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.innerHTML = `
-      <h4>${n.title}</h4>
-      <p class="meta">Sección: ${n.category}</p>
-      <p>${n.desc}</p>
-      <p><button data-id="${n.id}" class="play-btn">Ver video</button> <a href="categorias/${n.category}.html">Ver más</a></p>
-    `;
-    container.appendChild(card);
-  });
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  renderNews(newsData);
-  document.getElementById('today').textContent = new Date().toLocaleDateString('es-AR');
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  document.getElementById('news-list').addEventListener('click', e=>{
-    if(e.target.matches('.play-btn')){
-      const id = Number(e.target.dataset.id);
-      const item = newsData.find(n=>n.id===id);
-      if(item){
-        const player = document.getElementById('video-feature');
-        player.querySelector('source').src = item.video;
-        player.load();
-        player.play();
-        document.getElementById('featured-title').textContent = item.title;
-      }
-    }
+// ==========================
+// FECHA AUTOMÁTICA
+// ==========================
+document.getElementById("today").textContent =
+  new Date().toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
   });
 
-  // search
-  const search = document.getElementById('search');
-  search.addEventListener('input', ()=>{
-    const q = search.value.toLowerCase().trim();
-    const filtered = newsData.filter(n=> n.title.toLowerCase().includes(q) || n.desc.toLowerCase().includes(q));
-    renderNews(filtered);
-  });
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  // dark mode
-  const toggle = document.getElementById('toggle-dark');
-  toggle.addEventListener('click', ()=>{
-    document.body.classList.toggle('dark');
+
+// ==========================
+// MODO OSCURO
+// ==========================
+document.getElementById("toggle-dark").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
+
+
+// ==========================
+// CAMBIO DE VIDEO CON MINIATURAS
+// ==========================
+const featureVideo = document.getElementById("video-feature");
+const featureTitle = document.getElementById("featured-title");
+
+document.querySelectorAll(".thumb").forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    const src = thumb.dataset.video;
+    const title = thumb.dataset.title;
+
+    featureVideo.querySelector("source").src = "videos/" + src;
+    featureVideo.load();
+    featureVideo.play();
+
+    featureTitle.textContent = title;
   });
 });
+
+
+// ==========================
+// CAMBIO DE VIDEO POR SECCIÓN (URL PARAMS)
+// ==========================
+const params = new URLSearchParams(window.location.search);
+const videoParam = params.get("video");
+const titleParam = params.get("title");
+
+if (videoParam) {
+  featureVideo.querySelector("source").src = "videos/" + videoParam;
+  featureVideo.load();
+  featureVideo.play();
+
+  featureTitle.textContent = titleParam || "Sección";
+}
