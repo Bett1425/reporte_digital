@@ -108,44 +108,39 @@
    MENÚ COMO BOTONES
    ———————————————————————————————— */
 
+/* ============================= */
+/* FIX DEFINITIVO BOTONES GRANDES */
+/* ============================= */
+
+.main-nav {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: auto !important;
+}
+
 .main-nav a {
-  display: inline-block;
-  padding: 8px 16px;
-  margin-left: 8px;
-  background-color: #d10e0e;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 6px;
-  transition: all 0.25s ease;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
-  border: 2px solid transparent;
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: max-content !important;
+  flex: 0 0 auto !important;
+  padding: 8px 14px !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
 }
 
-.main-nav a:hover {
-  background-color: #c20b0b;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  border-color: #b60909;
-}
-
-/* Responsivo: botones se apilan en pantallas pequeñas */
+/* MOBILE */
 @media (max-width: 600px) {
   .main-nav {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: wrap !important;
   }
 
   .main-nav a {
-    flex: 0 0 auto;   /* 👈 evita que se estiren */
-    width: auto;      /* 👈 clave */
-    padding: 8px 14px;
-    text-align: center;
+    width: auto !important;
+    flex: 0 0 auto !important;
   }
 }
-
 
 /* ————————————————————————————————
    ESTILOS GLOBALES
