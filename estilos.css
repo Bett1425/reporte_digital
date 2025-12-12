@@ -263,3 +263,25 @@ img {
 .site-footer a {
   color: #c91111;
 }
+/* ============================= */
+/* RESTAURAR VISIBILIDAD DEL MENÚ */
+/* ============================= */
+
+.site-header {
+  display: block;
+}
+
+.main-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 10px;
+}
+
+.main-nav a {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
