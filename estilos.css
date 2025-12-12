@@ -1,102 +1,167 @@
-/* MINIATURAS DE VIDEO */
-.video-list {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
+/* ============ RESET ============ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.video-list h2 {
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-  font-weight: 600;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f4f4;
+  color: #222;
 }
 
-/* Miniaturas */
-.video-list .thumb {
-  cursor: pointer;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #222;
-  height: 140px;
-  position: relative;
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-
-/* Imagen dentro de miniatura */
-.video-list .thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Título de miniatura */
-.video-list .thumb::before {
-  content: attr(data-title);
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: rgb(219, 16, 16);
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
+/* ============ CONTENEDOR GENERAL ============ */
+.container {
   width: 90%;
-  text-align: center;
-  pointer-events: none;
+  max-width: 1100px;
+  margin: auto;
 }
 
-/* Icono Play */
-.video-list .thumb::after {
-  content: "▶";
-  position: absolute;
-  font-size: 2rem;
-  color: rgba(255, 255, 255, 0.9);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+/* ============ HEADER ============ */
+.site-header {
+  background: #20232a;
+  color: #fff;
+  padding: 15px 0;
+  margin-bottom: 25px;
 }
 
-.video-list .thumb:hover {
-  transform: scale(1.06);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.logo-rd {
+  background: #61dafb;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #000;
+}
 
-/* BOTONES DEL MENÚ */
+/* NAV */
 .main-nav {
   display: flex;
   gap: 10px;
 }
 
-.main-nav a {
-  display: inline-block;
-  padding: 8px 16px;
-  background: #d10e0e;
-  color: white;
-  border-radius: 6px;
-  font-weight: 600;
+.main-nav .nav-btn {
+  background: #61dafb;
+  padding: 8px 14px;
+  color: black;
+  border-radius: 5px;
   text-decoration: none;
-  transition: background 0.25s, transform 0.2s;
-  border: 2px solid transparent;
+  font-weight: bold;
+  transition: 0.25s ease-in-out;
 }
 
-.main-nav a:hover {
-  background: #b50909;
-  transform: scale(1.06);
+.main-nav .nav-btn:hover {
+  background: #ffffff;
+  color: #000;
+  transform: scale(1.05);
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
-  .main-nav {
-    flex-wrap: wrap;
-  }
-
-  .main-nav a {
-    flex: 1 1 calc(50% - 10px);
-    text-align: center;
-  }
+/* ============ HERO VIDEO ============ */
+.hero h2 {
+  margin-bottom: 10px;
 }
+
+.video-wrapper {
+  width: 100%;
+  margin: 15px 0;
+}
+
+#video-feature {
+  width: 100%;
+  border-radius: 8px;
+  background: #000;
+}
+
+/* ============ MINIATURAS ============ */
+.video-list {
+  margin-top: 35px;
+}
+
+.video-list h2 {
+  margin-bottom: 10px;
+}
+
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.thumb {
+  width: 170px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.thumb:hover {
+  transform: scale(1.05);
+}
+
+.thumb img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* ============ CONTROLES ============ */
+.controls {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.controls input {
+  padding: 8px 10px;
+  flex: 1;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.controls button {
+  padding: 8px 14px;
+  border: none;
+  background: #222;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background: #444;
+}
+
+/* ============ FOOTER ============ */
+.site-footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  text-align: center;
+  background: #20232a;
+  color: #fff;
+}
+
+/* ============ MODO OSCURO ============ */
+.dark-mode {
+  background: #111;
+  color: #eee;
+}
+
+.dark-mode .site-header,
+.dark-mode .site-footer {
+  background: #000;
+}
+
+.dark-mode .nav-btn {
+  background: #333;
+  color: #fff;
+}
+
+.dark-mode .nav-btn:hover {
+  background: #666;
+}
+
+
