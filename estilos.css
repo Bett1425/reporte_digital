@@ -1,29 +1,250 @@
-/* estilos.css - base sencillo y responsivo */
-:root{
-  --bg:#ffffff; --text:#111827; --accent:#1e40af; --muted:#6b7280;
-}
-*{box-sizing:border-box}
-body{font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:var(--text);margin:0;line-height:1.4}
-.container{max-width:980px;margin:0 auto;padding:1rem}
-.site-header{background:#0f172a;color:#fff;padding:.6rem 0}
-.header-inner{display:flex;align-items:center;justify-content:space-between}
-.branding{display:flex;align-items:center;gap:.6rem}
-.logo{width:48px;height:48px;border-radius:6px;background:#fff;object-fit:cover}
-.main-nav a{color:#cbd5e1;text-decoration:none;margin-left:12px}
-.hero{margin:1rem 0;padding:1rem;background:#f8fafc;border-radius:8px}
-.video-wrapper{max-width:100%;background:#000;padding:.4rem;border-radius:6px}
-.video-wrapper video{width:100%;height:auto;display:block;border-radius:4px}
-.cards{margin:1rem 0}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.card{background:#fff;border:1px solid #e6edf3;padding:.8rem;border-radius:8px}
-.card h4{margin:.2rem 0}
-.controls{position:fixed;right:12px;bottom:12px;background:rgba(255,255,255,0.95);border:1px solid #e5e7eb;padding:.6rem;border-radius:8px;box-shadow:0 6px 18px rgba(2,6,23,0.08)}
-.controls input{width:180px;padding:.4rem;border:1px solid #d1d5db;border-radius:6px}
-.controls button{margin-top:.4rem;padding:.4rem .6rem;border-radius:6px;border:0;background:var(--accent);color:#fff;cursor:pointer}
-.site-footer{padding:1rem 0;text-align:center;color:var(--muted);border-top:1px solid #e6edf3;margin-top:1rem}
+   MINIATURAS DE VIDEO (BOTONES)
+   ———————————————————————————————— */
 
-/* dark mode */
-body.dark{background:#0b1220;color:#e6eef8}
-body.dark .site-header{background:#071033}
-body.dark .card{background:#071133;border-color:#0e2140}
-body.dark .controls{background:rgba(2,6,23,0.8);color:#e6eef8;border-color:#0e2140}
+.video-list {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.video-list h2 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Contenedor de miniatura / botón */
+.video-list .thumb {
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, background-color 0.25s;
+  background-color: #222; 
+  position: relative;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  padding: 5px;
+  border: 2px solid transparent;
+}
+
+/* Ocultar cualquier imagen rota */
+.video-list .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: #222;
+  visibility: hidden; /* ocultamos imágenes */
+}
+
+/* Ícono play */
+.video-list .thumb::after {
+  content: "▶";
+  position: absolute;
+  font-size: 2.2rem;
+  color: rgba(255,255,255,0.9);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Hover — efecto botón */
+.video-list .thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+  background-color: #111;  
+  border-color: red;   
+}
+
+.video-list .thumb:hover::after {
+  transform: translate(-50%, -50%) scale(1.3);
+  color: #be1a1a;
+}
+/* Título dentro de las miniaturas generado automáticamente */
+.thumb::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: rgb(219, 16, 16);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  width: 90%;
+  max-width: 160px;
+  pointer-events: none;
+}
+
+
+/* ————————————————————————————————
+   MENÚ COMO BOTONES
+   ———————————————————————————————— */
+
+.main-nav a {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-left: 8px;
+  background-color: #d10e0e;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  border: 2px solid transparent;
+}
+
+.main-nav a:hover {
+  background-color: #c20b0b;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  border-color: #b60909;
+}
+
+/* Responsivo: botones se apilan en pantallas pequeñas */
+@media (max-width: 600px) {
+  .main-nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .main-nav a {
+    margin: 5px 5px 0 0;
+    flex: 1 1 calc(50% - 10px);
+    text-align: center;
+  }
+}
+
+/* ————————————————————————————————
+   ESTILOS GLOBALES
+   ———————————————————————————————— */
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+  line-height: 1.5;
+}
+
+h1, h2, h3, nav a, .meta {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-rd {
+  color: red;           /* letras rojas */
+  font-weight: 700;     /* negrita */
+  font-size: 2rem;      /* tamaño más grande que el resto */
+  margin-right: 5px;    /* separación del texto */
+}
+.branding h1 {
+  font-size: 1.5rem;   /* tamaño general del título */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+/* ————————————————————————————————
+   ENCABEZADO
+   ———————————————————————————————— */
+
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* ————————————————————————————————
+   HERO (VIDEO DESTACADO)
+   ———————————————————————————————— */
+
+.hero h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+#featured-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.meta {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.video-wrapper video {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* ————————————————————————————————
+   CONTROLES
+   ———————————————————————————————— */
+
+.controls {
+  margin-top: 40px;
+  display: flex;
+  gap: 10px;
+}
+
+#search {
+  padding: 8px 12px;
+  flex: 1;
+}
+
+#toggle-dark {
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* ————————————————————————————————
+   PIE DE PÁGINA
+   ———————————————————————————————— */
+
+.site-footer {
+  margin-top: 60px;
+  padding: 25px 0;
+  text-align: center;
+  background: #111;
+  color: white;
+}
+
+.site-footer a {
+  color: #c91111;
+}
