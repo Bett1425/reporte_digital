@@ -133,15 +133,19 @@
 @media (max-width: 600px) {
   .main-nav {
     display: flex;
+    gap: 8px;
     flex-wrap: wrap;
+    justify-content: center;
   }
-  
+
   .main-nav a {
-    margin: 5px 5px 0 0;
-    flex: 1 1 calc(50% - 10px);
+    flex: 0 0 auto;   /* 👈 evita que se estiren */
+    width: auto;      /* 👈 clave */
+    padding: 8px 14px;
     text-align: center;
   }
 }
+
 
 /* ————————————————————————————————
    ESTILOS GLOBALES
