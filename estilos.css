@@ -296,4 +296,9 @@ img {
   content: none !important;
   display: none !important;
 }
+/* Evitar miniaturas vacías */
+.video-list .thumb:empty {
+  display: none !important;
+}
+
 
