@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reporte Digital - Noticiero</title>
 
-  <!-- Estilos -->
   <link rel="stylesheet" href="estilos.css" />
-
 </head>
 <body>
 
@@ -15,21 +13,17 @@
   <header class="site-header">
     <div class="container header-inner">
 
-     <div class="branding">
-  <h1>
-    <span class="logo-rd">RD</span> Reporte Digital
-  </h1>
-</div>
-
+      <div class="branding">
+        <h1><span class="logo-rd">RD</span> Reporte Digital</h1>
+      </div>
 
       <nav class="main-nav">
-        <a href="index.html?video=Video1.mp4&title=Bienvenidos a Reporte Digital">Inicio</a>
-      <a href="index.html?video=Video2.mp4&title=Política">Política</a>
-<a href="index.html?video=Video3.mp4&title=Sociedad">Sociedad</a>
-<a href="index.html?video=Video4.mp4&title=Ciencia">Ciencia</a>
-<a href="index.html?video=Video5.mp4&title=Deportes">Deportes</a>
-<a href="index.html?video=Video6.mp4&title=Clima">Clima</a>
- 
+        <a href="index.html?video=Video1.mp4&title=Bienvenidos">Inicio</a>
+        <a href="index.html?video=Video2.mp4&title=Política">Política</a>
+        <a href="index.html?video=Video3.mp4&title=Sociedad">Sociedad</a>
+        <a href="index.html?video=Video4.mp4&title=Ciencia">Ciencia</a>
+        <a href="index.html?video=Video5.mp4&title=Deportes">Deportes</a>
+        <a href="index.html?video=Video6.mp4&title=Clima">Clima</a>
       </nav>
 
     </div>
@@ -46,29 +40,42 @@
       <div class="video-wrapper">
         <video id="video-feature" controls preload="metadata" poster="img/placeholder.jpg">
           <source src="videos/Video1.mp4" type="video/mp4">
-          Tu navegador no soporta video HTML5.
         </video>
       </div>
 
-      <h3 id="featured-title">Titular destacado: Bienvenidos a Reporte Digital</h3>
+      <h3 id="featured-title">Bienvenidos</h3>
       <p class="meta">Locución y edición: Betina Ruiz Díaz • Fecha: <span id="today"></span></p>
     </section>
 
 
-    <!-- —— MINIATURAS DE VIDEOS —— -->
+    <!-- —— MINIATURAS —— -->
     <section class="video-list">
       <h2>Seleccionar video</h2>
-<div class="thumb" data-video="videos/Video2.mp4" data-title="Título 2"></div>
-<div class="thumb" data-video="videos/Video3.mp4" data-title="Título 3"></div>
-<div class="thumb" data-video="videos/Video4.mp4" data-title="Título 4"></div>
-<div class="thumb" data-video="videos/Video5.mp4" data-title="Título 5"></div>
-<div class="thumb" data-video="videos/Video6.mp4" data-title="Título 6"></div>
 
-     
+      <div class="thumb" data-video="Video2.mp4" data-title="Política">
+        <img src="img/placeholder.jpg" alt="Miniatura política">
+      </div>
+
+      <div class="thumb" data-video="Video3.mp4" data-title="Sociedad">
+        <img src="img/placeholder.jpg" alt="Miniatura sociedad">
+      </div>
+
+      <div class="thumb" data-video="Video4.mp4" data-title="Ciencia">
+        <img src="img/placeholder.jpg" alt="Miniatura ciencia">
+      </div>
+
+      <div class="thumb" data-video="Video5.mp4" data-title="Deportes">
+        <img src="img/placeholder.jpg" alt="Miniatura deportes">
+      </div>
+
+      <div class="thumb" data-video="Video6.mp4" data-title="Clima">
+        <img src="img/placeholder.jpg" alt="Miniatura clima">
+      </div>
+
     </section>
 
 
-    <!-- —— CONTROLES DE BÚSQUEDA Y MODO OSCURO —— -->
+    <!-- —— CONTROLES —— -->
     <aside class="controls">
       <input id="search" placeholder="Buscar noticias..." />
       <button id="toggle-dark">Modo oscuro</button>
@@ -81,68 +88,57 @@
   <footer class="site-footer">
     <div class="container">
       <p>&copy; <span id="year"></span> Reporte Digital — Proyecto de Betina Ruiz Díaz</p>
-      <p>Contacto: 
-        <a href="mailto:info@example.com">info@example.com</a>
-      </p>
     </div>
   </footer>
 
 
-
-  <!-- ========= SCRIPTS ========= -->
+  <!-- ========= SCRIPT ========= -->
 
   <script src="script.js"></script>
 
-  <!-- Script de fecha, año y modo oscuro -->
   <script>
-    // Año actual
+    // Año
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Fecha del día
+    // Fecha
     const today = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById("today").textContent = today.toLocaleDateString('es-ES', options);
 
     // Modo oscuro
-    const toggleButton = document.getElementById("toggle-dark");
-    toggleButton.addEventListener("click", () => {
+    document.getElementById("toggle-dark").addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
     });
-  </script>
 
-
-  <!-- Script que cambia el video al hacer click en una miniatura -->
-  <script>
+    // Miniaturas → cambiar video
     const featureVideo = document.getElementById("video-feature");
     const featureTitle = document.getElementById("featured-title");
 
     document.querySelectorAll(".thumb").forEach(thumb => {
       thumb.addEventListener("click", () => {
-        const newSrc = thumb.dataset.video;
-        const newTitle = thumb.dataset.title;
+        const src = thumb.dataset.video;
+        const title = thumb.dataset.title;
 
-        featureVideo.querySelector("source").src = newSrc;
+        featureVideo.querySelector("source").src = "videos/" + src;
         featureVideo.load();
         featureVideo.play();
 
-        featureTitle.textContent = newTitle;
+        featureTitle.textContent = title;
       });
     });
+
+    // Leer parámetros URL
+    const params = new URLSearchParams(window.location.search);
+    const videoParam = params.get("video");
+    const titleParam = params.get("title");
+
+    if (videoParam) {
+      featureVideo.querySelector("source").src = "videos/" + videoParam;
+      featureVideo.load();
+      featureVideo.play();
+      featureTitle.textContent = titleParam || "Sección";
+    }
   </script>
-<script>
-  // Leer parámetros de la URL
-  const params = new URLSearchParams(window.location.search);
-  const videoParam = params.get("video");
-  const titleParam = params.get("title");
-
-  if (videoParam) {
-    featureVideo.querySelector("source").src = "videos/" + videoParam;
-    featureVideo.load();
-    featureVideo.play();
-
-    featureTitle.textContent = titleParam || "Sección";
-  }
-</script>
 
 </body>
 </html>
